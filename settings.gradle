@@ -1,0 +1,7 @@
+rootProject.name = 'spigot-classloader-hell'
+
+include 'libraryL'
+include 'pluginA-api'
+include 'pluginA-bukkit'
+include 'pluginB-bukkit'
+

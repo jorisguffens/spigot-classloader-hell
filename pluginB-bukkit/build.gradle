@@ -1,0 +1,36 @@
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'net.minecrell.plugin-yml.bukkit' version '0.5.1'
+    id 'java'
+}
+
+repositories {
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    // provided by server
+    compileOnly 'org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT'
+
+    // provided by plugin
+    compileOnly project(':pluginA-api')
+
+    // shade
+    implementation project(':libraryL')
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    archiveBaseName.set('pluginB')
+
+    // relocate libraries
+//    relocate 'com.jorisg.classloaderhell.library', 'com.jorisg.classloaderhell.pluginB.library'
+}
+
+bukkit {
+    name = 'pluginB'
+    main = project.group + '.pluginb.bukkit.PluginB'
+    description = 'PluginB'
+    apiVersion = '1.19'
+    softDepend = ['pluginA']
+}
